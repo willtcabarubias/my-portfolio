@@ -230,51 +230,6 @@ function Process() {
             </Reveal>
           ))}
         </div>
-
-        {/* Field note — one bordered band, equal-height cells */}
-        <Reveal>
-          <div className="mt-20 grid gap-px border border-white/15 bg-white/15 md:grid-cols-12">
-            {/* Quote */}
-            <div className="bg-ink flex min-h-[20rem] flex-col justify-between gap-8 p-8 md:col-span-7 md:p-12">
-              <div className="label opacity-50">(Field note — 001)</div>
-              <p className="font-serif text-[1.7rem] leading-[1.24] italic md:text-[2.3rem]">
-                “The best feature I ever shipped was removing a form field that made three staff members enter the same
-                name twice.”
-              </p>
-              <div className="flex items-end justify-between gap-6 border-t border-white/15 pt-5">
-                <div>
-                  <div className="display text-lg">Willy</div>
-                  <div className="label mt-1.5 opacity-50">On shipping small</div>
-                </div>
-                <span className="text-accent-2 font-serif text-4xl leading-none opacity-60">”</span>
-              </div>
-            </div>
-
-            {/* Image A */}
-            <figure className="bg-ink relative min-h-[16rem] overflow-hidden md:col-span-3">
-              <img
-                src="https://images.pexels.com/photos/7103110/pexels-photo-7103110.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=700"
-                alt="Public service counter"
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover grayscale transition-transform duration-[1200ms] hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-              <figcaption className="label absolute bottom-4 left-4 text-white/75">At the counter</figcaption>
-            </figure>
-
-            {/* Image B */}
-            <figure className="bg-ink relative min-h-[16rem] overflow-hidden md:col-span-2">
-              <img
-                src="https://images.pexels.com/photos/7857542/pexels-photo-7857542.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=600"
-                alt="Local business packing orders"
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover grayscale transition-transform duration-[1200ms] hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-              <figcaption className="label absolute bottom-4 left-4 text-white/75">On the floor</figcaption>
-            </figure>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
