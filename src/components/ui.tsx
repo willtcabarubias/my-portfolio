@@ -83,20 +83,23 @@ export function Parallax({ children, amount = 60 }: { children: ReactNode; amoun
 }
 
 export function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
-  const row = [...items, ...items];
   return (
     <div className="relative flex overflow-hidden py-5">
-      <div
-        className="marquee-track flex shrink-0 items-center gap-10 whitespace-nowrap pr-10"
-        style={reverse ? { animationDirection: "reverse" } : undefined}
-      >
-        {row.map((t, i) => (
-          <span key={i} className="flex items-center gap-10">
-            <span className="display text-2xl md:text-3xl">{t}</span>
-            <span className="text-accent text-lg">✳</span>
-          </span>
-        ))}
-      </div>
+      {[0, 1].map((k) => (
+        <div
+          key={k}
+          className="marquee-track flex shrink-0 items-center gap-10 whitespace-nowrap"
+          style={reverse ? { animationDirection: "reverse" } : undefined}
+          aria-hidden={k === 1}
+        >
+          {items.map((t, i) => (
+            <span key={`${k}-${i}`} className="flex items-center gap-10">
+              <span className="display text-2xl md:text-3xl">{t}</span>
+              <span className="text-accent text-lg">✳</span>
+            </span>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
