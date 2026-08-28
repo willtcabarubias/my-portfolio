@@ -118,3 +118,13 @@ body {
 .link-underline:hover {
   background-size: 100% 1px;
 }
+
+/* Desktop-only compact: 20% reduction → 80% of original */
+@media (min-width: 1024px) {
+  html {
+    font-size: 80%;
+  }
+  .max-w-\[1500px\] {
+    max-width: 1200px !important;
+  }
+}

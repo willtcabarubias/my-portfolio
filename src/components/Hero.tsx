@@ -60,7 +60,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-[1500px] flex-1 items-center gap-10 px-5 py-10 md:px-10 lg:grid-cols-12 lg:gap-14">
         {/* LEFT — headline */}
         <div className="lg:col-span-7">
-          <h1 className="display text-[15vw] leading-[0.82] sm:text-[11.5vw] lg:text-[7.2vw]">
+          <h1 className="display text-[15vw] leading-[0.82] sm:text-[11.5vw] lg:text-[clamp(2.5rem,5.76vw,5.76rem)]">
             {HEAD.map((line, i) => (
               <span key={line} className="block overflow-hidden">
                 <motion.span
@@ -75,7 +75,7 @@ export default function Hero() {
             ))}
             <span className="flex items-baseline gap-5 overflow-hidden">
               <motion.span
-                className="text-accent font-serif block shrink-0 text-[13vw] normal-case italic sm:text-[10.5vw] lg:text-[6.8vw]"
+                className="text-accent font-serif block shrink-0 text-[13vw] normal-case italic sm:text-[10.5vw] lg:text-[clamp(2rem,5.44vw,5.44rem)]"
                 initial={{ y: "112%" }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.3, duration: 1.15, ease: EASE }}

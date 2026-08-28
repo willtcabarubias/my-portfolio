@@ -75,7 +75,7 @@ export default function ProjectPage({ slug }: { slug: string }) {
                   {project.status}
                 </span>
               </div>
-              <h1 className="display text-[15vw] leading-[0.84] sm:text-[9vw] lg:text-[6.6vw]">
+              <h1 className="display text-[15vw] leading-[0.84] sm:text-[9vw] lg:text-[clamp(2.5rem,5.28vw,5.28rem)]">
                 <span className="block overflow-hidden">
                   <motion.span
                     className="block"
