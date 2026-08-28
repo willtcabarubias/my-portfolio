@@ -27,7 +27,7 @@ export default function Footer() {
           <div className="lg:col-span-3">
             <div className="label mb-6 opacity-50">Selected Work</div>
             <ul className="space-y-3">
-              {projects.slice(0, 5).map((p) => (
+              {projects.map((p) => (
                 <li key={p.slug}>
                   <button
                     onClick={() => navigate(`/work/${p.slug}`)}

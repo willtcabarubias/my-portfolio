@@ -4,7 +4,7 @@ export type Project = {
   title: string;
   subtitle: string;
   client: string;
-  sector: "Government" | "Retail" | "Commerce";
+  sector: "Government" | "Retail" | "Commerce" | "FinTech";
   category: string;
   year: string;
   timeline: string;
@@ -23,6 +23,7 @@ export type Project = {
   modules: string[];
   outcome: string;
   testimonial?: { quote: string; author: string; role: string };
+  liveUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -39,8 +40,8 @@ export const projects: Project[] = [
     role: "Lead Developer · Systems Analyst",
     status: "Live",
     accent: "#c8451d",
-    cover:
-      "https://images.pexels.com/photos/36883131/pexels-photo-36883131.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+    liveUrl: "https://osca-system-demo.vercel.app/",
+    cover: "/osca.jpg",
     gallery: [
       {
         src: "https://images.pexels.com/photos/38887909/pexels-photo-38887909.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
@@ -103,8 +104,8 @@ export const projects: Project[] = [
     role: "Full-stack Developer · Process Designer",
     status: "In Production",
     accent: "#1f5f4b",
-    cover:
-      "https://images.pexels.com/photos/7103110/pexels-photo-7103110.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+    liveUrl: "https://aics-system-demo.vercel.app/",
+    cover: "/aics.jpg",
     gallery: [
       {
         src: "https://images.pexels.com/photos/7103122/pexels-photo-7103122.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
@@ -149,233 +150,132 @@ export const projects: Project[] = [
       "Case turnaround dropped from eleven days to three, and the office passed its annual COA review with a complete digital paper trail.",
   },
   {
-    slug: "laptop-retail-pos",
-    index: "03",
-    title: "Circuit POS",
-    subtitle: "Laptop Retail, Serials & Warranty Platform",
-    client: "Independent laptop & computer retailer",
-    sector: "Retail",
-    category: "Point of Sale",
-    year: "2024",
-    timeline: "3 months · MVP → Multi-branch",
-    role: "Product Engineer",
-    status: "Live",
-    accent: "#2b4d8c",
-    cover:
-      "https://images.pexels.com/photos/12968298/pexels-photo-12968298.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-    gallery: [
-      {
-        src: "https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-        caption: "Every unit tracked by serial from delivery to warranty expiry.",
-      },
-      {
-        src: "https://images.pexels.com/photos/14553707/pexels-photo-14553707.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-        caption: "Margin visibility per unit, not just per invoice.",
-      },
-    ],
-    summary:
-      "Serial-level inventory, quoting, installment tracking and warranty claims for a laptop store selling high-value units.",
-    overview: [
-      "Selling laptops is not selling groceries. Each unit has a serial, a warranty window, a specific configuration and a real margin that must be defended. Generic POS software treats them as interchangeable stock.",
-      "Circuit POS models the individual unit. Sales staff can quote a build, reserve a serial, log an installment plan, and later pull the exact warranty history when the customer walks back in with a defect.",
-    ],
-    problem:
-      "Stock counts never matched the shelf, warranties were tracked in a notebook, and nobody knew which models were actually profitable after trade-ins and discounts.",
-    approach: [
-      "Built a serial-first inventory model where every laptop is a unique tracked asset.",
-      "Created a quotation builder for custom configurations with live margin preview.",
-      "Added a warranty desk with claim intake, service status and turnaround tracking.",
-      "Layered simple analytics: fastest movers, dead stock, margin per brand.",
-    ],
-    features: [
-      { title: "Serial-Level Stock", body: "Each unit carries its own specs, cost, supplier, warranty start and location." },
-      { title: "Quotation Builder", body: "Build a spec sheet, apply upgrades, preview margin, send a branded quote." },
-      { title: "Installment Ledger", body: "Track down payments, schedules and balances for in-house financing." },
-      { title: "Warranty Desk", body: "Claim intake, RMA status, loaner units and service turnaround timers." },
-      { title: "Trade-In Valuation", body: "Log trade-ins as inventory with grading and refurb cost tracking." },
-      { title: "Branch Transfers", body: "Move units between branches with confirmation on both ends." },
-    ],
-    metrics: [
-      { value: "99.4%", label: "Inventory accuracy" },
-      { value: "+22%", label: "Gross margin visibility" },
-      { value: "4,800", label: "Units serial-tracked" },
-      { value: "2 min", label: "Avg. checkout time" },
-    ],
-    stack: ["React", "TypeScript", "Node.js", "PostgreSQL", "Prisma", "Thermal Printing"],
-    modules: ["Inventory", "Sales", "Quotations", "Installments", "Warranty", "Suppliers", "Branches", "Analytics"],
-    outcome:
-      "The owner finally knows which models make money. Dead stock is cleared quarterly instead of aging on the shelf for a year.",
-    testimonial: {
-      quote: "The warranty module alone paid for the system. We stopped losing arguments with customers because everything is logged.",
-      author: "Store Owner",
-      role: "Computer Retail",
-    },
-  },
-  {
     slug: "ecommerce-storefront",
-    index: "04",
-    title: "Shopfront",
-    subtitle: "Local E-Commerce & Fulfillment Suite",
-    client: "Multi-category online seller",
+    index: "03",
+    title: "Laptop Storefront",
+    subtitle: "Preowned & Brand-New Laptop Store",
+    client: "Independent laptop retailer — Preowned & Brand-New",
     sector: "Commerce",
-    category: "E-Commerce",
+    category: "Laptop Retail",
     year: "2024",
-    timeline: "4 months · Store → Ops → Growth",
+    timeline: "4 months · Catalog → Checkout → Ops",
     role: "Full-stack Developer",
     status: "Live",
     accent: "#8a4b1f",
-    cover:
-      "https://images.pexels.com/photos/7857532/pexels-photo-7857532.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+    liveUrl: "https://demo-laptop.vercel.app/",
+    cover: "/store_front_assets/img2.png",
     gallery: [
       {
-        src: "https://images.pexels.com/photos/7857542/pexels-photo-7857542.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-        caption: "Pick-and-pack screens built for the actual packing table.",
+        src: "/store_front_assets/img1.png",
+        caption: "Storefront home — curated picks for brand-new and preowned, tuned for COD, e-wallets and cards.",
       },
       {
-        src: "https://images.pexels.com/photos/29502370/pexels-photo-29502370.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-        caption: "Checkout tuned for COD, e-wallets and cards.",
+        src: "/store_front_assets/img3.png",
+        caption: "Preowned detail — real photos per unit, battery health, cosmetic notes and serial-linked warranty.",
+      },
+      {
+        src: "/store_front_assets/img2.png",
+        caption: "Dual catalog — Brand-New and graded preowned (A/B) with transparent specs, condition and warranty at a glance.",
       },
     ],
     summary:
-      "A storefront and back-office built for local reality — cash on delivery, courier booking, and a packing table that actually keeps up.",
+      "A storefront for a laptop shop selling both preowned and brand-new units — grading you can trust, specs you can compare, checkout that fits local reality.",
     overview: [
-      "Most e-commerce templates assume card payments and a warehouse. This build assumes COD, e-wallets, a rider pickup at 4PM, and a two-person team packing on a folding table.",
-      "The storefront is fast and clean; the back office is where the real work happens — order triage, courier booking, stock sync and a return flow that does not lose money.",
+      "Most templates treat every SKU as new. This store sells two worlds side-by-side: sealed brand-new laptops and preowned units graded by condition, battery cycles and warranty window. Buyers need to know the difference without asking on chat.",
+      "The storefront makes condition obvious — grade badges, real photos per preowned unit vs. clean catalog shots for brand-new — while the back office keeps serials, stock and warranty claims in sync so nothing oversells and every warranty promise is traceable.",
     ],
     problem:
-      "Orders came from three chat apps and a spreadsheet. Overselling was constant, and reconciling COD remittances took an entire weekend every month.",
+      "Preowned listings looked like brand-new ones, so buyers didn't trust them and staff spent hours answering the same spec and condition questions. Brand-new and second-hand stock lived in separate sheets, causing oversells and inconsistent warranty handling.",
     approach: [
-      "Consolidated every channel into one order inbox with a single status vocabulary.",
-      "Built pick-and-pack screens sized for a tablet at the packing table.",
-      "Automated courier waybill generation and COD remittance reconciliation.",
-      "Added a lightweight CRM so repeat buyers get recognized, not re-entered.",
+      "Split the catalog into Brand-New (catalog stock) and Preowned (serial-level) with distinct data shapes — preowned carries grade, cosmetic notes, battery health and serial photos.",
+      "Built spec filters and side-by-side comparison (CPU / GPU / RAM / storage / condition / price) so buyers self-serve decisions.",
+      "Designed checkout for COD, GCash/Maya and cards with courier waybill and store-pickup flows.",
+      "Linked each preowned unit to its serial history so warranty and return eligibility are automatic at the packing table.",
     ],
     features: [
-      { title: "Fast Storefront", body: "Server-rendered catalog with variant support, image galleries and instant search." },
-      { title: "Unified Order Inbox", body: "Web, chat and marketplace orders in one queue with one status model." },
-      { title: "Pick & Pack Mode", body: "Tablet-friendly picking lists, barcode confirmation and packing verification." },
-      { title: "Courier Integration", body: "Waybill generation, pickup manifests and delivery status sync." },
-      { title: "COD Reconciliation", body: "Match courier remittances against orders and flag shortfalls automatically." },
-      { title: "Returns & Refunds", body: "Structured RMA with restocking rules and reason-code analytics." },
+      { title: "Dual Catalog", body: "Brand-New and Preowned in one store, with grade A/B badges and stock counted the right way." },
+      { title: "Condition Transparency", body: "Real photos per preowned unit, cosmetic notes, battery cycle count and warranty window." },
+      { title: "Spec Compare", body: "Compare CPU, GPU, RAM and storage side-by-side with price-per-performance at a glance." },
+      { title: "Smart Search & Filter", body: "Filter by brand, specs, condition, price and availability with instant results." },
+      { title: "COD & E-Wallet Checkout", body: "Cash on delivery, GCash/Maya and cards — with courier booking and pickup options." },
+      { title: "Warranty & Returns", body: "Serial-linked warranty countdown and structured RMA so claims are painless." },
     ],
     metrics: [
-      { value: "-64%", label: "Order processing time" },
+      { value: "-58%", label: "Chat inquiries per sale" },
       { value: "0", label: "Oversell incidents" },
       { value: "1.9s", label: "Storefront LCP" },
-      { value: "+31%", label: "Repeat purchase rate" },
+      { value: "+31%", label: "Preowned sell-through" },
     ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Stripe / GCash", "Vercel"],
-    modules: ["Catalog", "Checkout", "Orders", "Fulfillment", "Inventory", "Returns", "CRM", "Reports"],
+    modules: ["Catalog", "Condition Grading", "Checkout", "Orders", "Fulfillment", "Warranty", "CRM", "Reports"],
     outcome:
-      "Monthly COD reconciliation dropped from a full weekend to under an hour, and the team doubled daily order volume without hiring.",
+      "Buyers now self-serve the comparison that used to take 20 chat messages, and the team runs one inventory instead of two — no more oversells, no more warranty arguments.",
   },
   {
-    slug: "barangay-certificate-system",
-    index: "05",
-    title: "Barangay Desk",
-    subtitle: "Residency Records & Certificate Issuance",
-    client: "Barangay Local Government Unit",
-    sector: "Government",
-    category: "Civil Registry",
-    year: "2023",
-    timeline: "2 months · Rapid deployment",
-    role: "Developer · Trainer",
+    slug: "tradencelab",
+    index: "04",
+    title: "TradenceLab",
+    subtitle: "Discipline Layer for Binance Futures Traders",
+    client: "Indie FinTech — Binance Futures Ecosystem",
+    sector: "FinTech",
+    category: "Risk Platform",
+    year: "2026",
+    timeline: "3 months · Guardrails → Live Account → Telegram",
+    role: "Product Engineer · Binance API + Telegram",
     status: "Live",
-    accent: "#4a3b7a",
-    cover:
-      "https://images.pexels.com/photos/7103104/pexels-photo-7103104.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+    accent: "#f0b90b",
+    liveUrl: "https://tradence-lab-demo-eta.vercel.app/",
+    cover: "/tradencelab_asstes/img2.png",
     gallery: [
       {
-        src: "https://images.pexels.com/photos/4976710/pexels-photo-4976710.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-        caption: "Templated certificates with automatic control numbers.",
+        src: "/tradencelab_asstes/img1.png",
+        caption: "Arm your guardrails — daily loss limit, leverage cap and cooldown configured before you trade.",
+      },
+      {
+        src: "/tradencelab_asstes/img3.png",
+        caption: "Telegram alert the moment you break a rule — live Binance Futures account watched via read-only API.",
+      },
+      {
+        src: "/tradencelab_asstes/img4.png",
+        caption: "Breach timeline with account snapshots — review, not revenge trade.",
+      },
+      {
+        src: "/tradencelab_asstes/img2.png",
+        caption: "Read-only Binance connect — no trading permission, no withdrawal, discipline only.",
       },
     ],
     summary:
-      "Household-based resident records with instant clearance, indigency and residency certificate printing.",
+      "Trading discipline enforcement for Binance Futures — connect a read-only API key, arm your guardrails and get Telegram alerts the instant you break your own risk rules.",
     overview: [
-      "A barangay issues dozens of certificates a day, each hand-typed into a Word file and re-typed for the logbook. The same resident is encoded over and over.",
-      "Barangay Desk stores residents once, organized by household, and turns certificate issuance into a two-click action with automatic control numbering and a searchable issuance log.",
+      "TradenceLab is the discipline layer futures traders know they need but can't enforce in the heat of the moment. You set the rules when you're calm — daily loss limit, leverage cap, cooldown after a losing streak — and TradenceLab watches your live Binance Futures account for you.",
+      "No trade execution, no custody. A read-only API key streams position and PnL; the guardrail engine evaluates every update and fires a Telegram alert the second a rule triggers. Beginners and revenge traders get the pause they wouldn't give themselves.",
     ],
     problem:
-      "Certificates were typed from scratch each time, with no reliable log of what was issued, to whom, or for what purpose.",
+      "Traders know their rules but break them in real time — revenge trading after a loss, creeping leverage, ignoring a daily stop. Willpower fails when PnL is flashing red, and a dashboard banner is easy to miss.",
     approach: [
-      "Built a household-first data model matching how barangays actually think about residents.",
-      "Templated every certificate type with dynamic fields and official formatting.",
-      "Added a blotter and complaints log tied to the same resident records.",
-      "Trained staff in a single two-hour session with a printed one-page cheat sheet.",
+      "Built on read-only Binance Futures API — subscribes to live account and position updates, never requests trade permission.",
+      "Modeled guardrails as composable risk rules (daily loss, max leverage, consecutive losses, cooldown windows) with explicit arming per user.",
+      "Designed Telegram as the enforcement surface — instant, out-of-app, impossible to ignore versus in-dashboard banners.",
+      "Logged every trigger with an account snapshot for post-trade review and discipline streaks to reward adherence.",
     ],
     features: [
-      { title: "Household Registry", body: "Residents grouped by household with head-of-family relationships." },
-      { title: "Certificate Templates", body: "Clearance, indigency, residency and business permit endorsements." },
-      { title: "Control Numbering", body: "Automatic sequential numbers with year prefixes and reprint tracking." },
-      { title: "Blotter Log", body: "Incident recording linked to resident profiles with case status." },
-      { title: "Revenue Log", body: "Daily collection summary per certificate type for the treasurer." },
-      { title: "Offline Mode", body: "Runs on a local machine so brownouts never stop the counter." },
+      { title: "Read-Only Connect", body: "Binance Futures API with trade disabled — verifies permissions before arming." },
+      { title: "Guardrail Builder", body: "Daily loss limits, leverage caps, cooldowns and custom thresholds — arm or disarm per session." },
+      { title: "Live Account Watch", body: "Evaluates real PnL and positions against guardrails on every account update." },
+      { title: "Telegram Alerts", body: "Instant breach alerts with rule, value and account context — not a delayed email." },
+      { title: "Breach Timeline", body: "History of triggers with snapshots so you review, not replay, mistakes." },
+      { title: "Discipline Streak", body: "Streaks and cool-down enforcement to reward rule adherence, not just punish." },
     ],
     metrics: [
-      { value: "40 sec", label: "Certificate issuance" },
-      { value: "8,900", label: "Residents encoded" },
-      { value: "100%", label: "Issuance logged" },
-      { value: "2 hrs", label: "Staff training time" },
+      { value: "< 2s", label: "Alert latency" },
+      { value: "0", label: "Trade permissions requested" },
+      { value: "100%", label: "Telegram delivery" },
+      { value: "24/7", label: "Account watch" },
     ],
-    stack: ["PHP", "MySQL", "jQuery", "Bootstrap", "TCPDF", "XAMPP Local"],
-    modules: ["Residents", "Households", "Certificates", "Blotter", "Revenue", "Users", "Backup"],
+    stack: ["Next.js", "TypeScript", "Binance Futures API", "Telegram Bot API", "PostgreSQL", "Vercel"],
+    modules: ["API Connect", "Guardrails", "Watcher", "Telegram", "Breach Log", "Discipline", "Auth", "Audit"],
     outcome:
-      "Residents now wait under a minute at the counter, and the barangay produces monthly issuance and revenue reports automatically.",
-  },
-  {
-    slug: "inventory-intelligence",
-    index: "06",
-    title: "Stock Signal",
-    subtitle: "Inventory Intelligence for Small Retailers",
-    client: "Retail group — 3 stores",
-    sector: "Retail",
-    category: "Analytics",
-    year: "2023",
-    timeline: "6 weeks · Focused build",
-    role: "Developer · Data Modeling",
-    status: "Pilot",
-    accent: "#1f5f4b",
-    cover:
-      "https://images.pexels.com/photos/34803988/pexels-photo-34803988.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-    gallery: [
-      {
-        src: "https://images.pexels.com/photos/7857531/pexels-photo-7857531.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-        caption: "Reorder suggestions that respect real supplier lead times.",
-      },
-    ],
-    summary:
-      "A quiet dashboard that tells small store owners exactly what to reorder, what to discount, and what is silently eating their cash.",
-    overview: [
-      "Small retailers rarely lack data — they lack a reading of it. Stock Signal ingests daily sales and turns it into three answers: reorder now, mark down now, stop buying this.",
-      "No machine learning theater. Just honest velocity math, lead-time aware reorder points, and a dead-stock list nobody can ignore.",
-    ],
-    problem:
-      "Cash was trapped in slow-moving stock while best-sellers went out of stock every other week. Reordering was based on memory.",
-    approach: [
-      "Computed rolling sales velocity per SKU with seasonality smoothing.",
-      "Derived reorder points from actual supplier lead times, not guesses.",
-      "Ranked dead stock by capital tied up rather than by unit count.",
-      "Delivered a weekly digest so owners act without opening a dashboard.",
-    ],
-    features: [
-      { title: "Reorder Engine", body: "Lead-time aware reorder points with suggested purchase quantities." },
-      { title: "Dead Stock Radar", body: "Ranked by capital locked, with suggested markdown ladders." },
-      { title: "Velocity Charts", body: "Rolling 7/30/90-day movement per SKU, brand and category." },
-      { title: "Multi-Store View", body: "Compare stores and suggest inter-branch transfers before reordering." },
-      { title: "Weekly Digest", body: "A short email summary of the five decisions that matter this week." },
-      { title: "CSV Ingestion", body: "Works with whatever POS export the store already has." },
-    ],
-    metrics: [
-      { value: "-37%", label: "Dead stock value" },
-      { value: "+14%", label: "In-stock rate" },
-      { value: "3", label: "Stores connected" },
-      { value: "6 wks", label: "Time to first insight" },
-    ],
-    stack: ["React", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Recharts"],
-    modules: ["Ingestion", "Velocity", "Reorder", "Dead Stock", "Transfers", "Digest"],
-    outcome:
-      "Within one quarter the group released a significant chunk of trapped capital and stopped running out of its top twenty SKUs.",
+      "Rules stop being sticky notes. Traders get the pause that protects the account — alerted before the next revenge trade, with a timeline to learn instead of repeat.",
   },
 ];
 

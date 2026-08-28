@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { EASE, LineIn } from "./ui";
+import { Chevron, EASE, LineIn } from "./ui";
 
 /* ── Config ─────────────────────────────────────────────────── */
 
@@ -82,7 +82,7 @@ const BUDGETS = ["Under ₱100k", "₱100k – ₱300k", "₱300k – ₱800k", 
 const STAGES = ["Just an idea", "Have requirements", "Replacing a system", "Rescuing a build"];
 const STEPS = ["Scope", "Modules", "Details", "Send"] as const;
 
-const EMAIL = "hello@willy.dev";
+const EMAIL = "willy.cabarubias.dev@gmail.com";
 
 /* ── Parts ──────────────────────────────────────────────────── */
 
@@ -261,24 +261,36 @@ export default function BriefBuilder() {
         <div className="hairline grid gap-px border bg-[var(--line)] lg:grid-cols-12">
           {/* ── Left: steps ─────────────────────────── */}
           <div className="bg-[var(--bg)] p-6 md:p-10 lg:col-span-7">
-            <div className="mb-10 flex flex-wrap items-center gap-2">
-              {STEPS.map((s, i) => {
-                const done = i < step;
-                const active = i === step;
-                return (
-                  <button
-                    key={s}
-                    onClick={() => setStep(i)}
-                    className={`label hairline flex items-center gap-2 rounded-full border px-3.5 py-2 transition-colors ${
-                      active ? "border-[var(--color-accent)] text-accent" : done ? "text-[var(--fg)]" : "soft"
-                    }`}
-                  >
-                    <span className="opacity-50">{String(i + 1).padStart(2, "0")}</span>
-                    {s}
-                    {done && <span className="text-accent">✓</span>}
-                  </button>
-                );
-              })}
+            <div className="mb-10 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {STEPS.map((s, i) => {
+                  const done = i < step;
+                  const active = i === step;
+                  return (
+                    <button
+                      key={s}
+                      onClick={() => setStep(i)}
+                      className={`label hairline flex items-center gap-2 rounded-full border px-3.5 py-2 transition-colors ${
+                        active ? "border-[var(--color-accent)] text-accent" : done ? "text-[var(--fg)]" : "soft"
+                      }`}
+                    >
+                      <span className="opacity-50">{String(i + 1).padStart(2, "0")}</span>
+                      {s}
+                      {done && <span className="text-accent">✓</span>}
+                    </button>
+                  );
+                })}
+              </div>
+              {step < 3 ? (
+                <button
+                  onClick={() => canNext && setStep((s) => s + 1)}
+                  disabled={!canNext}
+                  className="label inline-flex items-center gap-1.5 rounded-full bg-[var(--fg)] px-5 py-2.5 text-[var(--bg)] transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  next
+                  <Chevron direction="right" className="h-3.5 w-3.5" />
+                </button>
+              ) : null}
             </div>
 
             <AnimatePresence mode="wait">
@@ -456,26 +468,22 @@ export default function BriefBuilder() {
               <button
                 onClick={() => setStep((s) => Math.max(0, s - 1))}
                 disabled={step === 0}
-                className="label soft transition-opacity disabled:opacity-25"
+                className="label soft inline-flex items-center gap-1.5 transition-opacity disabled:opacity-25"
               >
-                ← Back
+                <Chevron direction="left" className="h-3.5 w-3.5" />
+                Back
               </button>
-              {step < 3 ? (
-                <button
-                  onClick={() => canNext && setStep((s) => s + 1)}
-                  disabled={!canNext}
-                  className="label rounded-full bg-[var(--fg)] px-5 py-3 text-[var(--bg)] transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-30"
-                >
-                  Next — {STEPS[step + 1]} →
-                </button>
-              ) : (
+              {step === 3 ? (
                 <button
                   onClick={send}
                   disabled={!valid}
-                  className="label bg-accent rounded-full px-6 py-3 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-30"
+                  className="label bg-accent inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-30"
                 >
-                  {sent ? "Sent ✓" : "Send to Willy →"}
+                  {sent ? "Sent ✓" : "Send to Willy"}
+                  {!sent && <Chevron direction="right" className="h-3.5 w-3.5" />}
                 </button>
+              ) : (
+                <span className="label soft opacity-50">Step {step + 1} / 4</span>
               )}
             </div>
           </div>

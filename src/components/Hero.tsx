@@ -6,8 +6,8 @@ import { Arrow, EASE } from "./ui";
 const RAILS = [
   { k: "OSCA", v: "Senior Registry" },
   { k: "AICS", v: "Crisis Assistance" },
-  { k: "POS", v: "Retail & Serials" },
-  { k: "SHOP", v: "E-Commerce Ops" },
+  { k: "STORE", v: "store front" },
+  { k: "TradenceLab", v: "trading guardrails" },
 ];
 
 const HEAD = ["Systems", "that serve"];
@@ -51,9 +51,8 @@ export default function Hero() {
       >
         <span className="label soft flex items-center gap-2">
           <span className="bg-accent inline-block h-1.5 w-1.5 animate-pulse rounded-full" />
-          Available — Q2 2026
+          Surigao City, Philippines · GMT+8
         </span>
-        <span className="label soft hidden sm:inline">Est. 2019 · Philippines · GMT+8</span>
         <span className="label soft ml-auto hidden md:inline">Portfolio Vol. 02</span>
       </motion.div>
 
@@ -98,11 +97,26 @@ export default function Hero() {
             transition={{ delay: 0.62, duration: 0.9, ease: EASE }}
             className="mt-10 max-w-xl"
           >
-            <p className="text-[15px] leading-relaxed">
-              I'm <span className="font-medium">Willy</span> — I build government platforms like{" "}
-              <span className="text-accent">OSCA</span> and <span className="text-accent">AICS</span>, plus POS and
-              e-commerce systems for local businesses. Records that reconcile, counters that move.
-            </p>
+            <div className="space-y-3">
+              <p className="text-[15px] leading-relaxed">
+                <span className="font-medium">WILLY ESCABAL CABARUBIAS</span> — BSIS, Bachelor of Science in
+                Information Systems<br />
+                <span className="soft text-sm">Surigao City, Philippines · GMT+8 · Full-stack dev</span>
+              </p>
+              <div className="soft space-y-2 text-[13px] leading-relaxed">
+                <p>
+                  <span className="label text-[11px] tracking-wide">Frontend:</span> React · Vite · TypeScript ·
+                  Tailwind · Zustand · Radix · Framer Motion · Recharts · Dexie (offline) · docxtemplater · ExcelJS
+                </p>
+                <p>
+                  <span className="label text-[11px] tracking-wide">Backend:</span> Supabase (Postgres + Auth +
+                  Storage) · Next.js · Railway · vite-plugin-singlefile
+                </p>
+                <p>
+                  <span className="label text-[11px] tracking-wide">Payments:</span> Stripe · Squizzy
+                </p>
+              </div>
+            </div>
 
             <div className="mt-8 flex flex-wrap gap-2.5">
               <button
@@ -125,7 +139,7 @@ export default function Hero() {
               {[
                 { k: "20+", v: "Systems shipped" },
                 { k: "40k+", v: "Records migrated" },
-                { k: "6 yrs", v: "Building software" },
+                { k: "3 yrs", v: "Building software" },
               ].map((s) => (
                 <div key={s.v}>
                   <div className="display text-2xl md:text-[1.75rem]">{s.k}</div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import CommandPalette from "./components/CommandPalette";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
-import { EASE } from "./components/ui";
+import { Chevron, EASE } from "./components/ui";
 import Home from "./pages/Home";
 import ProjectPage from "./pages/ProjectPage";
 import { useRoute, useTheme } from "./lib/useRoute";
@@ -66,7 +66,7 @@ export default function App() {
             className="label fixed right-5 bottom-5 z-[62] flex h-12 w-12 items-center justify-center rounded-full bg-[var(--fg)] text-[var(--bg)] shadow-lg md:right-8 md:bottom-8"
             aria-label="Back to top"
           >
-            ↑
+            <Chevron direction="up" className="h-5 w-5" />
           </motion.button>
         )}
       </AnimatePresence>

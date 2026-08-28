@@ -109,6 +109,28 @@ export function Arrow({ className }: { className?: string }) {
   );
 }
 
+export function Chevron({
+  className,
+  direction = "right",
+}: {
+  className?: string;
+  direction?: "left" | "right" | "up" | "down";
+}) {
+  const d =
+    direction === "left"
+      ? "M15 18L9 12L15 6"
+      : direction === "up"
+        ? "M6 15L12 9L18 15"
+        : direction === "down"
+          ? "M6 9L12 15L18 9"
+          : "M9 18L15 12L9 6";
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={cn("h-4 w-4", className)}>
+      <path d={d} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function Tag({ children }: { children: ReactNode }) {
   return (
     <span className="label hairline rounded-full border px-3 py-1.5 leading-none">{children}</span>

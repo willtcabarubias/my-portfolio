@@ -2,7 +2,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { projects } from "../data/projects";
 import { navigate } from "../lib/useRoute";
-import { Arrow, EASE, LineIn, Reveal } from "../components/ui";
+import { Arrow, Chevron, EASE, LineIn, Reveal } from "../components/ui";
 
 export default function ProjectPage({ slug }: { slug: string }) {
   const idx = projects.findIndex((p) => p.slug === slug);
@@ -41,13 +41,27 @@ export default function ProjectPage({ slug }: { slug: string }) {
       {/* Header */}
       <header className="px-5 pt-28 pb-10 md:px-10 md:pt-36">
         <div className="mx-auto max-w-[1500px]">
-          <button
-            onClick={() => navigate("/work")}
-            className="label soft group mb-10 flex items-center gap-2 transition-colors hover:text-[var(--fg)]"
-          >
-            <Arrow className="h-3.5 w-3.5 rotate-180 transition-transform group-hover:-translate-x-1" />
-            All Work
-          </button>
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+            <button
+              onClick={() => navigate("/work")}
+              className="label soft group flex items-center gap-2 transition-colors hover:text-[var(--fg)]"
+            >
+              <Chevron direction="left" className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
+              All Work
+            </button>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label inline-flex items-center gap-2 rounded-full px-4 py-2 text-white shadow-sm transition-transform hover:-translate-y-0.5"
+                style={{ background: accent }}
+              >
+                Visit Live Store
+                <Arrow className="h-3 w-3 -rotate-45" />
+              </a>
+            )}
+          </div>
 
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
@@ -82,7 +96,7 @@ export default function ProjectPage({ slug }: { slug: string }) {
                 {project.subtitle}
               </motion.p>
             </div>
-            <div className="flex items-end lg:col-span-4">
+            <div className="flex flex-col justify-end gap-4 lg:col-span-4">
               <p className="soft text-sm leading-relaxed">{project.summary}</p>
             </div>
           </div>

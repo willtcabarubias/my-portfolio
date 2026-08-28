@@ -44,9 +44,9 @@ export default function CommandPalette({
       {
         id: "copy",
         title: "Copy email address",
-        hint: "hello@willy.dev",
+        hint: "willy.cabarubias.dev@gmail.com",
         kind: "Action",
-        action: () => navigator.clipboard?.writeText("hello@willy.dev"),
+        action: () => navigator.clipboard?.writeText("willy.cabarubias.dev@gmail.com"),
       },
     ];
     return [...projectItems, ...nav];

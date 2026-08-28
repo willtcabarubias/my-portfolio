@@ -6,13 +6,13 @@ import BriefBuilder from "../components/BriefBuilder";
 import Hero from "../components/Hero";
 import { Arrow, EASE, LineIn, Marquee, Reveal, SectionHead, Tag } from "../components/ui";
 
-const filters = ["All", "Government", "Retail", "Commerce"] as const;
+const filters = ["All", "Government", "Commerce", "FinTech"] as const;
 
 function Ticker() {
   return (
     <div className="hairline border-y bg-[var(--fg)] text-[var(--bg)]">
       <Marquee
-        items={["OSCA Systems", "AICS Portals", "POS & Inventory", "E-Commerce", "Barangay Records", "Data Migration"]}
+        items={["OSCA Systems", "AICS Portals", "Laptop Storefront", "TradenceLab", "Binance Guardrails", "Telegram Alerts"]}
       />
     </div>
   );
@@ -27,15 +27,21 @@ function Statement() {
           <div className="lg:col-span-9">
             <Reveal>
               <p className="font-serif text-3xl leading-[1.25] sm:text-4xl md:text-5xl lg:text-[3.4rem]">
-                Software for a government office is not a demo. It is a{" "}
-                <span className="text-accent italic">counter with a queue</span>, a payout that must reconcile, and an
-                audit that will ask questions. I build systems that hold up on the day it actually matters.
+                I solve <span className="text-accent italic">real operational problems</span> — turning burden-heavy,
+                manual work into systematized flows that{" "}
+                <span className="text-accent italic">improve productivity</span> without adding headcount.
+              </p>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <p className="soft mt-6 max-w-3xl text-base leading-relaxed md:text-lg">
+                From government counters to small-business counters: no more scattered chats, paper logs and spreadsheets
+                — just clear systems that reconcile, move faster, and scale with the people who actually use them.
               </p>
             </Reveal>
             <div className="hairline mt-14 grid gap-10 border-t pt-10 sm:grid-cols-3">
               {[
                 { k: "20+", v: "Systems delivered across LGUs and local businesses" },
-                { k: "6 yrs", v: "Building public-sector and retail software" },
+                { k: "3 yrs", v: "Building public-sector and retail software" },
                 { k: "40k+", v: "Records migrated without a single loss" },
               ].map((s, i) => (
                 <Reveal key={s.k} delay={i * 0.08}>
@@ -72,7 +78,7 @@ function WorkGrid() {
           }
           right={
             <p className="soft text-sm leading-relaxed">
-              Six systems, each solving a specific operational problem. Open any project for the full breakdown —
+              Four systems, each solving a specific operational problem. Open any project for the full breakdown —
               context, decisions, architecture and measured outcome.
             </p>
           }
@@ -104,7 +110,7 @@ function WorkGrid() {
           ))}
         </div>
 
-        <motion.div layout className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-2">
           {list.map((p, i) => (
             <motion.article
               key={p.slug}
@@ -127,6 +133,18 @@ function WorkGrid() {
                 <span className="label absolute top-3 left-3 rounded-full bg-[var(--bg)] px-2.5 py-1.5">
                   {p.status}
                 </span>
+                {p.liveUrl && (
+                  <a
+                    href={p.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="label absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-white shadow-md transition-transform hover:-translate-y-0.5"
+                    style={{ background: p.accent }}
+                  >
+                    Live Demo ↗
+                  </a>
+                )}
                 <span
                   className="absolute right-3 bottom-3 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full bg-[var(--bg)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
                   style={{ color: p.accent }}
@@ -143,6 +161,17 @@ function WorkGrid() {
                     {p.title}
                   </h3>
                   <p className="soft mt-2 max-w-[22rem] text-sm leading-relaxed">{p.subtitle}</p>
+                  {p.liveUrl && (
+                    <a
+                      href={p.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="label mt-3 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 transition-colors hover:bg-[var(--fg)] hover:text-[var(--bg)]"
+                    >
+                      Visit Live Store ↗
+                    </a>
+                  )}
                 </div>
                 <span className="label soft shrink-0">{p.year}</span>
               </div>
@@ -237,7 +266,7 @@ function Process() {
 
 function Contact() {
   const [copied, setCopied] = useState(false);
-  const email = "hello@willy.dev";
+  const email = "willy.cabarubias.dev@gmail.com";
 
   return (
     <section id="contact" className="scroll-mt-20 px-5 py-28 md:px-10 md:py-36">

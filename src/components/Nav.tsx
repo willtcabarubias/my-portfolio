@@ -43,7 +43,6 @@ export default function Nav({
         <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 md:px-10">
           <button onClick={() => navigate("/")} className="group flex items-baseline gap-2">
             <span className="display text-xl md:text-2xl">Willy</span>
-            <span className="label soft hidden sm:inline">Systems Developer</span>
           </button>
 
           <nav className="hidden items-center gap-9 md:flex">
@@ -81,7 +80,7 @@ export default function Nav({
               onClick={() => navigate("/build")}
               className="label bg-accent hidden rounded-full px-4 py-2.5 text-white transition-transform hover:-translate-y-0.5 sm:block"
             >
-              Build a Brief
+              Hire me
             </button>
             <button
               onClick={() => setMenu(true)}
@@ -110,7 +109,7 @@ export default function Nav({
               </button>
             </div>
             <div className="flex flex-col px-5 pt-6">
-              {[...links, { label: "Build a Brief", to: "/build" }].map((l, i) => (
+              {[...links, { label: "Hire me", to: "/build" }].map((l, i) => (
                 <motion.button
                   key={l.to}
                   initial={{ opacity: 0, y: 20 }}
