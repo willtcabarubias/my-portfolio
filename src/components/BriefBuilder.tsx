@@ -176,9 +176,8 @@ export default function BriefBuilder() {
     if (stage) n += 10;
     if (timeline) n += 10;
     if (budget) n += 10;
-    if (form.name.trim()) n += 10;
-    if (/\S+@\S+\.\S+/.test(form.email)) n += 15;
-    if (form.message.trim().length > 12) n += 5;
+    if (form.name.trim()) n += 15;
+    if (form.message.trim().length > 12) n += 15;
     return Math.min(n, 100);
   }, [picked, modules, stage, timeline, budget, form]);
 
@@ -188,7 +187,7 @@ export default function BriefBuilder() {
       "PROJECT BRIEF — willy.dev",
       "──────────────────────────────",
       `FROM      : ${form.name || "—"}${form.org ? ` (${form.org})` : ""}`,
-      `EMAIL     : ${form.email || "—"}`,
+      `EMAIL     : ${form.email || "— (sender's logged-in Gmail/Outlook)"}`,
       "",
       `SCOPE     : ${svc.length ? svc.join(" | ") : "—"}`,
       `MODULES   : ${modules.length ? modules.join(", ") : "—"}`,
@@ -205,7 +204,7 @@ export default function BriefBuilder() {
     ].join("\n");
   }, [picked, modules, stage, timeline, budget, users, form, pct]);
 
-  const valid = picked.length > 0 && form.name.trim() !== "" && /\S+@\S+\.\S+/.test(form.email);
+  const valid = picked.length > 0 && form.name.trim() !== "";
   const canNext = [picked.length > 0, true, true, valid][step];
 
   const toggle = (arr: string[], set: (v: string[]) => void, v: string) =>
@@ -452,24 +451,20 @@ export default function BriefBuilder() {
                   <div className="space-y-6">
                     <div>
                       <h3 className="display mb-2 text-3xl">Where do I reply?</h3>
-                      <p className="soft text-sm">No newsletters, no auto-sequences. A real reply within 24 hours.</p>
+                      <p className="soft text-sm">
+                        Your email app will send from your logged-in account — I’ll reply there. No extra email field
+                        needed.
+                      </p>
                     </div>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      {[
-                        { k: "name", label: "Your name *", ph: "Juan Dela Cruz" },
-                        { k: "email", label: "Email *", ph: "you@office.gov.ph" },
-                      ].map((f) => (
-                        <label key={f.k} className="block">
-                          <span className="label soft mb-2 block">{f.label}</span>
-                          <input
-                            value={form[f.k as "name" | "email"]}
-                            onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
-                            placeholder={f.ph}
-                            className="hairline w-full border-b bg-transparent py-3 text-sm outline-none transition-colors placeholder:opacity-30 focus:border-[var(--color-accent)]"
-                          />
-                        </label>
-                      ))}
-                    </div>
+                    <label className="block">
+                      <span className="label soft mb-2 block">Your name *</span>
+                      <input
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        placeholder="Juan Dela Cruz"
+                        className="hairline w-full border-b bg-transparent py-3 text-sm outline-none transition-colors placeholder:opacity-30 focus:border-[var(--color-accent)]"
+                      />
+                    </label>
                     <label className="block">
                       <span className="label soft mb-2 block">Organization / business</span>
                       <input
@@ -493,7 +488,11 @@ export default function BriefBuilder() {
                         className="hairline surface w-full resize-none border p-4 text-sm leading-relaxed outline-none transition-colors placeholder:opacity-30 focus:border-[var(--color-accent)]"
                       />
                     </label>
-                    {!valid && <p className="label text-accent">Required: scope · name · valid email</p>}
+                    {!valid && <p className="label text-accent">Required: scope · name</p>}
+                    <p className="soft text-xs leading-relaxed">
+                      You’ll send from your logged-in Gmail/Outlook — I’ll reply to that address. If you prefer a
+                      different reply-to, mention it in the notes.
+                    </p>
                   </div>
                 )}
               </motion.div>
