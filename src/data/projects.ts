@@ -105,7 +105,7 @@ export const projects: Project[] = [
     status: "In Production",
     accent: "#1f5f4b",
     liveUrl: "https://aics-system-demo.vercel.app/",
-    cover: "/aics.jpg",
+    cover: "/aics.webp",
     gallery: [
       {
         src: "https://images.pexels.com/photos/7103122/pexels-photo-7103122.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
