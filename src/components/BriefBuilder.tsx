@@ -211,16 +211,43 @@ export default function BriefBuilder() {
   const toggle = (arr: string[], set: (v: string[]) => void, v: string) =>
     set(arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
 
-  const send = () => {
-    if (!valid) return;
+  const subject = useMemo(() => {
     const codes = SERVICES.filter((s) => picked.includes(s.id))
       .map((s) => s.code)
       .join("/");
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(
-      `Project Brief — ${codes} — ${form.name}`,
-    )}&body=${encodeURIComponent(briefText)}`;
+    return `Project Brief — ${codes || "—"} — ${form.name || "—"}`;
+  }, [picked, form.name]);
+
+  const gmailUrl = useMemo(
+    () => `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(briefText)}`,
+    [subject, briefText],
+  );
+  const outlookUrl = useMemo(
+    () => `https://outlook.live.com/mail/0/deeplink/compose?to=${EMAIL}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(briefText)}`,
+    [subject, briefText],
+  );
+  const mailtoUrl = useMemo(
+    () => `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(briefText)}`,
+    [subject, briefText],
+  );
+
+  const send = () => {
+    if (!valid) return;
+    // Always copy as fallback — desktop mailto often fails without a mail client
+    navigator.clipboard?.writeText(briefText);
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = mailtoUrl;
+      // Fallback to Gmail web if mailto didn't leave the page
+      setTimeout(() => {
+        if (document.visibilityState === "visible") window.open(gmailUrl, "_blank", "noopener");
+      }, 800);
+    } else {
+      // Desktop: open Gmail web compose (no mail app needed) — works when logged into Gmail
+      window.open(gmailUrl, "_blank", "noopener");
+    }
     setSent(true);
-    setTimeout(() => setSent(false), 7000);
+    setTimeout(() => setSent(false), 12000);
   };
 
   const copy = () => {
@@ -290,7 +317,16 @@ export default function BriefBuilder() {
                   next
                   <Chevron direction="right" className="h-3.5 w-3.5" />
                 </button>
-              ) : null}
+              ) : (
+                <button
+                  onClick={send}
+                  disabled={!valid}
+                  className="label bg-accent inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  {sent ? "Sent ✓" : "Send to Willy"}
+                  {!sent && <Chevron direction="right" className="h-3.5 w-3.5" />}
+                </button>
+              )}
             </div>
 
             <AnimatePresence mode="wait">
@@ -473,18 +509,7 @@ export default function BriefBuilder() {
                 <Chevron direction="left" className="h-3.5 w-3.5" />
                 Back
               </button>
-              {step === 3 ? (
-                <button
-                  onClick={send}
-                  disabled={!valid}
-                  className="label bg-accent inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-30"
-                >
-                  {sent ? "Sent ✓" : "Send to Willy"}
-                  {!sent && <Chevron direction="right" className="h-3.5 w-3.5" />}
-                </button>
-              ) : (
-                <span className="label soft opacity-50">Step {step + 1} / 4</span>
-              )}
+              <span className="label soft opacity-50">Step {step + 1} / 4</span>
             </div>
           </div>
 
@@ -527,10 +552,40 @@ export default function BriefBuilder() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="label text-accent mt-4 border border-[var(--color-accent)] p-4 leading-relaxed"
+                    className="label mt-4 border border-[var(--color-accent)] p-4 leading-relaxed"
                   >
-                    ✓ Your mail app is opening with the brief in the body. If nothing happened, hit “Copy brief” and
-                    send it to {EMAIL}.
+                    <div className="text-accent mb-3 flex items-center gap-2">
+                      <span>✓</span> Brief copied to clipboard. Gmail compose should open in a new tab on desktop.
+                    </div>
+                    <p className="soft mb-3 text-xs leading-relaxed">
+                      If Gmail didn’t open, you’re not logged into Gmail or you’re on mobile — use the buttons below
+                      or email directly to <span className="font-medium text-[var(--fg)]">{EMAIL}</span>.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href={gmailUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="label inline-flex items-center gap-1.5 rounded-full bg-[var(--fg)] px-3.5 py-2 text-[var(--bg)]"
+                      >
+                        Open Gmail
+                        <Chevron direction="right" className="h-3 w-3" />
+                      </a>
+                      <a
+                        href={outlookUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hairline label inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2"
+                      >
+                        Open Outlook
+                      </a>
+                      <button onClick={copy} className="hairline label rounded-full border px-3.5 py-2">
+                        Copy again
+                      </button>
+                      <a href={mailtoUrl} className="hairline label rounded-full border px-3.5 py-2">
+                        Try mail app
+                      </a>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
